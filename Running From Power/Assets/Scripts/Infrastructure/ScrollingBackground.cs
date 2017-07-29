@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using Tiled2Unity;
     using UnityEngine;
+    using UnityEngine.Assertions;
 
     /// <summary>
     ///     Manages a scrolling background in the horizontal direction.
@@ -13,10 +14,13 @@
         private float speed = 10;
 
         [SerializeField]
-        private List<TiledMap> parts;
+        private List<string> parts;
 
         [SerializeField]
         private int nextPart = 0;
+
+        [SerializeField]
+        private string partsDirectory = "";
 
         private TiledMap back;
 
@@ -42,14 +46,19 @@
                 nextPart = 0;
             }
 
-            TiledMap part = parts[nextPart];
+            string partPath = partsDirectory + "/" + parts[nextPart];
+            GameObject partPrefabGO = Resources.Load(partPath) as GameObject;
+            Assert.IsTrue(partPrefabGO != null, "The part prefab does not exist! Path:" + partPath);
+            TiledMap partPrefab = partPrefabGO.GetComponent<TiledMap>();
+            Assert.IsTrue(partPrefab != null, "The part prefab does not have a TiledMap component.");
+
             nextPart++;
             if (nextPart >= parts.Count)
             {
                 nextPart = 0;
             }
 
-            return Instantiate(part, new Vector3(baseX, part.GetMapHeightInPixelsScaled()/2), Quaternion.identity, transform);
+            return Instantiate(partPrefab, new Vector3(baseX, partPrefab.GetMapHeightInPixelsScaled()/2), Quaternion.identity, transform);
         }
 
         private void FixedUpdate()
