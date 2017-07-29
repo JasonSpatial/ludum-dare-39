@@ -80,7 +80,7 @@
         {
             mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 
-            front = LoadNextMapPart(CameraHalfWidth);
+            front = LoadNextMapPart(-CameraHalfWidth);
             back = LoadNextMapPart(front.transform.position.x + front.GetMapWidthInPixelsScaled());
         }
     }
