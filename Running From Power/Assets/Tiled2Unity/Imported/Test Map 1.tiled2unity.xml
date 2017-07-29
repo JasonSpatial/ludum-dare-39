@@ -1,18 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 7/29/2017 2:33:45 PM-->
+<!--Last exported: 7/29/2017 3:32:13 PM-->
 <Tiled2Unity version="1.0.12.3">
   <AssignMaterial mesh="Test-Map-1_mesh_0001" material="platformerPack_industrial_tilesheet" />
   <Prefab name="Test Map 1" orientation="Orthogonal" staggerAxis="Y" staggerIndex="Odd" hexSideLength="0" numLayers="1" numTilesWide="30" numTilesHigh="9" tileWidth="70" tileHeight="70" exportScale="0.01" mapWidthInPixels="2100" mapHeightInPixels="630" backgroundColor="#808080" resourcePath="Maps">
     <GameObject name="Tile Layer 1" x="0" y="0" z="0">
       <TileLayer offsetX="0" offsetY="0" />
       <GameObject name="platformerPack_industrial_tilesheet" mesh="Test-Map-1_mesh_0001" sortingLayerName="" sortingOrder="0" opacity="1" />
+      <GameObject name="Collision_Ground" layer="Ground">
+        <PolygonCollider2D>
+          <Path>18.2,-2.8 17.5,-2.8 17.5,-2.97 18.2,-2.97</Path>
+          <Path>18.9,-3.5 16.8,-3.5 16.8,-3.67 18.9,-3.67</Path>
+          <Path>16.8,-4.2 16.1,-4.2 16.1,-4.37 16.8,-4.37</Path>
+          <Path>18.2,-4.2 17.5,-4.2 17.5,-4.37 18.2,-4.37</Path>
+          <Path>19.6,-4.2 18.9,-4.2 18.9,-4.37 19.6,-4.37</Path>
+          <Path>18.2,-4.9 14.7,-4.9 14.7,-5.07 18.2,-5.07</Path>
+          <Path>20.3,-4.9 19.6,-4.9 19.6,-5.07 20.3,-5.07</Path>
+          <Path>0,-5.77 10.5,-5.77 10.5,-5.6 0,-5.6</Path>
+          <Path>12.6,-5.77 14.7,-5.77 14.7,-5.6 12.6,-5.6</Path>
+          <Path>20.3,-5.6 18.2,-5.6 18.2,-5.77 20.3,-5.77</Path>
+        </PolygonCollider2D>
+      </GameObject>
       <GameObject name="Collision">
         <PolygonCollider2D>
-          <Path>12.6,-6.3 20.3,-6.3 20.3,-4.9 19.6,-4.9 19.6,-5.6 18.2,-5.6 18.2,-4.2 18.9,-4.2 18.9,-3.5 18.2,-3.5 18.2,-2.8 17.5,-2.8 17.5,-3.5 16.8,-3.5 16.8,-4.2 17.5,-4.2 17.5,-4.9 16.8,-4.9 16.8,-4.2 16.1,-4.2 16.1,-4.9 14.7,-4.9 14.7,-5.6 12.6,-5.6</Path>
-          <Path>19.6,-4.2 18.9,-4.2 18.9,-4.9 19.6,-4.9</Path>
-          <Path>0,-6.3 10.5,-6.3 10.5,-5.6 0,-5.6</Path>
+          <Path>18.2,-2.97 17.5,-2.97 17.5,-3.5 18.2,-3.5</Path>
+          <Path>18.9,-3.67 16.8,-3.67 16.8,-4.2 18.9,-4.2</Path>
+          <Path>16.8,-4.37 16.1,-4.37 16.1,-4.9 16.8,-4.9</Path>
+          <Path>18.2,-4.37 17.5,-4.37 17.5,-4.9 18.2,-4.9</Path>
+          <Path>19.6,-4.37 18.9,-4.37 18.9,-4.9 19.6,-4.9</Path>
+          <Path>12.6,-6.3 20.3,-6.3 20.3,-5.77 18.2,-5.77 18.2,-5.07 14.7,-5.07 14.7,-5.77 12.6,-5.77</Path>
+          <Path>20.3,-5.07 19.6,-5.07 19.6,-5.6 20.3,-5.6</Path>
+          <Path>0,-6.3 10.5,-6.3 10.5,-5.77 0,-5.77</Path>
         </PolygonCollider2D>
       </GameObject>
     </GameObject>
