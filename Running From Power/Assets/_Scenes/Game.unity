@@ -224,9 +224,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1047453aba4c14aa995715beedf1ec5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 5
   parts:
-  - {fileID: 114993371466560230, guid: ced9f49a860ab48a39a372f6e36c89fd, type: 2}
+  - {fileID: 114538154864652894, guid: bcd67807fa211425ea1aa2207423d22a, type: 2}
   nextPart: 0
 --- !u!4 &1919026427
 Transform:
