@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1047453aba4c14aa995715beedf1ec5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 10
   parts:
   - Easy Map 1
   nextPart: 0

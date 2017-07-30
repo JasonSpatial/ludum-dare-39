@@ -147,11 +147,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114397442552189138, guid: b4747a971117c489d925172ec5f33934,
-        type: 2}
-      propertyPath: parts.Array.data[0]
-      value: Easy Map 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4747a971117c489d925172ec5f33934, type: 2}
   m_IsPrefabParent: 0
@@ -282,11 +277,6 @@ Prefab:
     - target: {fileID: 4897385564521404, guid: 4e24dafa3d2ab4b81bedf0cb6fb9b546, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114811674199273152, guid: 4e24dafa3d2ab4b81bedf0cb6fb9b546,
-        type: 2}
-      propertyPath: bottomOfTheGame
-      value: -3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e24dafa3d2ab4b81bedf0cb6fb9b546, type: 2}

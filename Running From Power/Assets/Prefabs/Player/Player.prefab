@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1852480894797090}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.33, y: 1.43, z: 0}
+  m_LocalPosition: {x: -2.33, y: -1.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4957352595107586}
@@ -174,6 +174,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpImpulse: 10
   grounded: 0
+  bottomOfTheGame: -3
+  slowDownRate: 1
+  jumpButtonTimeWindow: 0.1
 --- !u!212 &212284885045856696
 SpriteRenderer:
   m_ObjectHideFlags: 1

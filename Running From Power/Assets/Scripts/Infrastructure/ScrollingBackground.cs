@@ -80,19 +80,44 @@
 
         private void Start()
         {
-            mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+            GameObject mainCameraGO = GameObject.FindGameObjectWithTag("MainCamera");
+            Assert.IsTrue(mainCameraGO != null, "Could not find the main camera.");
+            mainCamera = mainCameraGO.GetComponent<Camera>();
+            Assert.IsTrue(mainCamera != null, "Main camera does not have a Camera component.");
 
             front = LoadNextMapPart(-CameraHalfWidth);
             back = LoadNextMapPart(front.transform.position.x + front.GetMapWidthInPixelsScaled());
         }
 
+        /// <summary>
+        ///     Decrease the scrolling speed of this background.
+        /// </summary>
+        /// <param name="delta">Delta.</param>
+        public void SlowDown(float delta)
+        {
+            speed -= delta;
+            if (speed < 0) speed = 0;
+            UpdateVelocities();
+        }
+
+        private void UpdateVelocities()
+        {
+			Rigidbody2D physicsBodyFront = front.GetComponent<Rigidbody2D>();
+            Assert.IsTrue(physicsBodyFront != null, "Front part does not have a RigidBody2D.");
+			Rigidbody2D physicsBodyBack = back.GetComponent<Rigidbody2D>();
+            Assert.IsTrue(physicsBodyBack != null, "Back part does not have a RigidBody2D.");
+			physicsBodyFront.velocity = speed*Vector2.left;
+			physicsBodyBack.velocity = speed*Vector2.left;
+		}
+
+        /// <summary>
+        ///     Increases the scrolling speed of this background.
+        /// </summary>
+        /// <param name="delta">The amount to increase the speed by.</param>
         public void SpeedUp(float delta)
         {
             speed += delta;
-            Rigidbody2D physicsBodyFront = front.GetComponent<Rigidbody2D>();
-            Rigidbody2D physicsBodyBack = back.GetComponent<Rigidbody2D>();
-            physicsBodyFront.velocity = speed * Vector2.left;
-            physicsBodyBack.velocity = speed * Vector2.left;
+            UpdateVelocities();
         }
     }
 }
