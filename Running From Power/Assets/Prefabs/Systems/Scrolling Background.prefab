@@ -53,6 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   parts:
-  - Test Map 1
+  - Easy Map 1
   nextPart: 0
   partsDirectory: Maps
