@@ -2,6 +2,7 @@
 {
     using UnityEngine;
     using UnityEngine.Assertions;
+    using Assets.Scripts.Infrastructure;
 
     /// <summary>
     ///     Handles controlling the player.
@@ -26,17 +27,28 @@
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            groundIntersectionsCount++;
-            grounded = true;
+            if (collision.tag == "Powerup")
+            {
+                ScrollingBackground background = GameObject.Find("Scrolling Background").GetComponent<ScrollingBackground>();
+                background.SpeedUp(2);
+            }
+            else if (collision.name == "Collision_Ground")
+            {
+                groundIntersectionsCount++;
+                grounded = true;
+            }
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            groundIntersectionsCount--;
-            Assert.IsTrue(groundIntersectionsCount >= 0, "Ground intersections counter has become negative!");
-            if (groundIntersectionsCount == 0)
+            if (collision.name == "Collision_Ground")
             {
-                grounded = false;
+                groundIntersectionsCount--;
+                Assert.IsTrue(groundIntersectionsCount >= 0, "Ground intersections counter has become negative!");
+                if (groundIntersectionsCount == 0)
+                {
+                    grounded = false;
+                }
             }
         }
 

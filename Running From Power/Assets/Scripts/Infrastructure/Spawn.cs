@@ -29,7 +29,7 @@
                 {
                     GameObject newGameObject =  Instantiate(prefab, transform.position, Quaternion.identity, parent);
                     newGameObject.name = prefab.name;
-
+                    newGameObject.tag = prefab.tag;
                     SpriteRenderer[] renderers = newGameObject.GetComponentsInChildren<SpriteRenderer>();
                     foreach (SpriteRenderer renderer in renderers)
                     {

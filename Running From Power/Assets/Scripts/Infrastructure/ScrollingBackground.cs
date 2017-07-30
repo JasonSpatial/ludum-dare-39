@@ -85,5 +85,14 @@
             front = LoadNextMapPart(-CameraHalfWidth);
             back = LoadNextMapPart(front.transform.position.x + front.GetMapWidthInPixelsScaled());
         }
+
+        public void SpeedUp(float delta)
+        {
+            speed += delta;
+            Rigidbody2D physicsBodyFront = front.GetComponent<Rigidbody2D>();
+            Rigidbody2D physicsBodyBack = back.GetComponent<Rigidbody2D>();
+            physicsBodyFront.velocity = speed * Vector2.left;
+            physicsBodyBack.velocity = speed * Vector2.left;
+        }
     }
 }
