@@ -58,15 +58,17 @@
                 nextPart = 0;
             }
 
-            return Instantiate(partPrefab, new Vector3(baseX, partPrefab.GetMapHeightInPixelsScaled()/2), Quaternion.identity, transform);
+            TiledMap part = Instantiate(partPrefab, new Vector3(baseX, partPrefab.GetMapHeightInPixelsScaled()/2), Quaternion.identity, transform);
+
+            Rigidbody2D physicsBody = part.GetComponent<Rigidbody2D>();
+			Assert.IsTrue(physicsBody != null, "The map '" + partPath + "' needs to have a Rigidbody2D.");
+            physicsBody.velocity = speed*Vector2.left;
+
+			return part;
         }
 
         private void FixedUpdate()
         {
-            front.transform.position += new Vector3(-speed*Time.deltaTime, 0);
-
-            back.transform.position = front.transform.position + new Vector3(front.GetMapWidthInPixelsScaled(), 0);
-
             if (front.transform.position.x + front.GetMapWidthInPixelsScaled() <= -CameraHalfWidth)
             {
                 front.transform.position = back.transform.position + new Vector3(back.GetMapWidthInPixelsScaled(), 0);

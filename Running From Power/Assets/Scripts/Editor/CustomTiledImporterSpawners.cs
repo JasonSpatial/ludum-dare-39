@@ -3,7 +3,6 @@
     using Infrastructure;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using Tiled2Unity;
     using UnityEngine;
     using Utilities;
@@ -18,6 +17,9 @@
 
         public void CustomizePrefab(GameObject prefab)
         {
+            Rigidbody2D physicsBody = prefab.AddComponent<Rigidbody2D>();
+            physicsBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+            physicsBody.bodyType = RigidbodyType2D.Kinematic;
         }
 
         private bool GetEnumProperty<TEnum>(string propertyName, IDictionary<string, string> props, out TEnum result, string objectType, int objectID)
