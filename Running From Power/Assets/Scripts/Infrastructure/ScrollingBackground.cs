@@ -78,6 +78,15 @@
             }
         }
 
+        /// <summary>
+        ///     Gets the current scrolling speed.
+        /// </summary>
+        /// <returns>The current scroling speed.</returns>
+        public float GetSpeed()
+        {
+            return speed;
+        }
+
         private void Start()
         {
             GameObject mainCameraGO = GameObject.FindGameObjectWithTag("MainCamera");

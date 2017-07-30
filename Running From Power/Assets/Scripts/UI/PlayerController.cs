@@ -75,6 +75,11 @@
                 GameOver();
             }
 
+            if (Mathf.Approximately(background.GetSpeed(), 0))
+            {
+                GameOver();
+            }
+
             background.SlowDown(slowDownRate*Time.fixedDeltaTime);
         }
 
