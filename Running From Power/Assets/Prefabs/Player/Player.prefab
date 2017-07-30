@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 50596250978352504}
   - component: {fileID: 61244627472266234}
   - component: {fileID: 114811674199273152}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4957352595107586}
   - component: {fileID: 61771671164489974}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
