@@ -56,3 +56,4 @@ MonoBehaviour:
   - Easy Map 1
   nextPart: 0
   partsDirectory: Maps
+  maxPower: 35

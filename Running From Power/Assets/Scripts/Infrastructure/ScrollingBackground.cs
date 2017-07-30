@@ -4,6 +4,7 @@
     using Tiled2Unity;
     using UnityEngine;
     using UnityEngine.Assertions;
+    using UnityEngine.UI;
 
     /// <summary>
     ///     Manages a scrolling background in the horizontal direction.
@@ -22,11 +23,16 @@
         [SerializeField]
         private string partsDirectory = "";
 
+        [SerializeField]
+        private float maxPower = 100;
+
         private TiledMap back;
 
         private TiledMap front;
 
         private Camera mainCamera;
+
+        private Slider guiPowerBar;
 
         private float CameraHalfWidth
         {
@@ -96,6 +102,11 @@
 
             front = LoadNextMapPart(-CameraHalfWidth);
             back = LoadNextMapPart(front.transform.position.x + front.GetMapWidthInPixelsScaled());
+
+            GameObject powerBarGO = GameObject.Find("GUI_PowerBar");
+            Assert.IsTrue(powerBarGO != null, "No power bar found in the GUI.");
+            guiPowerBar = powerBarGO.GetComponent<Slider>();
+            Assert.IsTrue(guiPowerBar != null, "Power bar does not have a Slider component.");
         }
 
         /// <summary>
@@ -117,7 +128,9 @@
             Assert.IsTrue(physicsBodyBack != null, "Back part does not have a RigidBody2D.");
 			physicsBodyFront.velocity = speed*Vector2.left;
 			physicsBodyBack.velocity = speed*Vector2.left;
-		}
+
+            guiPowerBar.value = Mathf.Min(speed/maxPower, 1);
+        }
 
         /// <summary>
         ///     Increases the scrolling speed of this background.
