@@ -53,16 +53,17 @@
                 else
                 {
                     jumpStartTimer += Time.fixedDeltaTime;
-                    if (jumpStartTimer <= jumpButtonTimeWindow)
-                    {
-                        if (grounded && !jumpHandled)
-                        {
-                            jumpHandled = true;
-                            Jump();
-                        }
-                    }
                 }
-            }
+
+				if (jumpStartTimer <= jumpButtonTimeWindow)
+				{
+					if (grounded && !jumpHandled)
+					{
+						jumpHandled = true;
+						Jump();
+					}
+				}
+			}
             else
             {
                 jumpHandled = false;
@@ -84,6 +85,9 @@
 
         private void Jump()
         {
+            // Negate any existing vertical velocity before jumping.
+            physicsBody.AddForce(-physicsBody.velocity.y*Vector2.up, ForceMode2D.Impulse);
+
             physicsBody.AddForce(jumpImpulse*Vector2.up, ForceMode2D.Impulse);
         }
 

@@ -176,7 +176,7 @@ MonoBehaviour:
   grounded: 0
   bottomOfTheGame: -3
   slowDownRate: 1
-  jumpButtonTimeWindow: 0.1
+  jumpButtonTimeWindow: 0.3
 --- !u!212 &212284885045856696
 SpriteRenderer:
   m_ObjectHideFlags: 1
