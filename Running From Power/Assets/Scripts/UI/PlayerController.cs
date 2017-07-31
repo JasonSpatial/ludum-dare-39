@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.UI
+﻿﻿namespace Assets.Scripts.UI
 {
     using System;
     using Assets.Scripts.Infrastructure;
@@ -148,9 +148,9 @@
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.otherCollider.name == "Collision_Wall" && collision.relativeVelocity.x > 0)
+            if (collision.collider.name == "Collision_Wall" && collision.relativeVelocity.x < 0)
             {
-                
+                GameOver();
             }
         }
 
