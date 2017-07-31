@@ -15,10 +15,15 @@
         private float speed = 10;
 
         [SerializeField]
-        private List<string> parts;
+        private List<string> partsStart;
 
         [SerializeField]
-        private int nextPart = 0;
+        private List<string> partsEasy;
+
+        [SerializeField]
+        private List<string> partsMed;
+
+        private int partsLoaded = 0;  // count of parts that have been loaded so far, used to progress the difficulty of the game
 
         [SerializeField]
         private string partsDirectory = "";
@@ -36,28 +41,28 @@
 
 		private TiledMap LoadNextMapPart(float baseX)
         {
-            if (parts.Count == 0) return null;
-
-            if (nextPart >= parts.Count)
+            string partFile;
+            if (partsLoaded < partsStart.Count)
+                partFile = partsStart[partsLoaded];
+            else if (partsLoaded < 6)
+                partFile = partsEasy[Random.Range(0, partsEasy.Count)];
+            else if (partsLoaded < 12)
             {
-                nextPart = 0;
+                // 50/50 chance of getting an easy or medium part
+                if(Random.Range(0, 1) == 1)
+                    partFile = partsEasy[Random.Range(0, partsEasy.Count)];
+                else
+                    partFile = partsMed[Random.Range(0, partsMed.Count)];
             }
-            else if (nextPart < 0)
-            {
-                nextPart = 0;
-            }
+            else
+                partFile = partsMed[Random.Range(0, partsMed.Count)];
 
-            string partPath = partsDirectory + "/" + parts[nextPart];
+            Debug.Log(partFile);
+            string partPath = partsDirectory + "/" + partFile;
             GameObject partPrefabGO = Resources.Load(partPath) as GameObject;
             Assert.IsTrue(partPrefabGO != null, "The part prefab does not exist! Path:" + partPath);
             TiledMap partPrefab = partPrefabGO.GetComponent<TiledMap>();
             Assert.IsTrue(partPrefab != null, "The part prefab does not have a TiledMap component.");
-
-            nextPart++;
-            if (nextPart >= parts.Count)
-            {
-                nextPart = 0;
-            }
 
             TiledMap part = Instantiate(partPrefab, new Vector3(baseX, partPrefab.GetMapHeightInPixelsScaled()/2), Quaternion.identity, transform);
 
@@ -65,7 +70,9 @@
 			Assert.IsTrue(physicsBody != null, "The map '" + partPath + "' needs to have a Rigidbody2D.");
             physicsBody.velocity = speed*Vector2.left;
 
-			return part;
+            partsLoaded += 1;
+
+            return part;
         }
 
         private void FixedUpdate()
