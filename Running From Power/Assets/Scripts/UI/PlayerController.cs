@@ -53,9 +53,11 @@
         private Animator playerAnimator;
 
         private Text textDistance;
+        private Text textBestDistance;
 
         private float distance;  // distance the player has moved in meters
         private float startX;   // the starting position of the Player, which is typically -2.33. Used to calculate distance from this point
+        private float distanceBest = 0.0f; // The best/furthest distance the player reached this run of the game
 
         bool started = false;
 
@@ -113,6 +115,12 @@
 
             distance = (transform.position.x - startX) / 3;
             textDistance.text = "Meters " + distance.ToString("0.00");
+            
+            if (distance > distanceBest)
+            {
+                distanceBest = distance;
+                textBestDistance.text = "Best " + distanceBest.ToString("0.00");
+            }
         }
 
         private void GameOver()
@@ -209,6 +217,9 @@
             GameObject distanceGO = GameObject.Find("Distance");
             textDistance = distanceGO.GetComponent<Text>();
 
+            GameObject bestDistanceGO = GameObject.Find("Best Distance");
+            textBestDistance = bestDistanceGO.GetComponent<Text>();
+            
             guiPowerBar.value = Mathf.Min(speedInitial / maxPower, 1);
 
             playerAnimator.StartPlayback();
