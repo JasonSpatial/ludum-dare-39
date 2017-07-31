@@ -175,7 +175,7 @@ MonoBehaviour:
   jumpImpulse: 10
   grounded: 0
   bottomOfTheGame: -3
-  slowDownRate: 1
+  slowDownRate: 0.5
   jumpButtonTimeWindow: 0.3
   speed: 8
   maxPower: 30

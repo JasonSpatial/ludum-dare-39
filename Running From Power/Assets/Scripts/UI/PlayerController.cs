@@ -114,6 +114,14 @@
             physicsBody.AddForce(jumpImpulse*Vector2.up, ForceMode2D.Impulse);
         }
 
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.otherCollider.name == "Collision_Wall" && collision.relativeVelocity.x > 0)
+            {
+                
+            }
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.tag == "Powerup")

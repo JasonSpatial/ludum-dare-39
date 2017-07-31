@@ -52,7 +52,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  parts:
+  partsStart:
+  - Start Map
+  partsEasy:
   - Easy Map 1
-  nextPart: 0
+  - Easy Map 2
+  partsMed:
+  - Med Map 1
+  - Med Map 2
   partsDirectory: Maps
