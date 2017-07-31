@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="30" height="9" tilewidth="70" tileheight="70" nextobjectid="3">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="30" height="9" tilewidth="70" tileheight="70" nextobjectid="7">
  <properties>
   <property name="unity:resourcePath" value="Maps"/>
  </properties>
@@ -17,5 +17,12 @@
 17,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3
 </data>
  </layer>
- <objectgroup name="Powerups"/>
+ <objectgroup name="Powerups">
+  <object id="3" x="543.5" y="98.5" width="333" height="48">
+   <text fontfamily="MS Shell Dlg 2" pixelsize="35" wrap="1">Running From Power</text>
+  </object>
+  <object id="5" x="554.5" y="246.5" width="251" height="37">
+   <text fontfamily="MS Shell Dlg 2" pixelsize="27" wrap="1">Press Space to Begin</text>
+  </object>
+ </objectgroup>
 </map>

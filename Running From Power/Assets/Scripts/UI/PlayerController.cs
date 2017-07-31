@@ -29,9 +29,10 @@
         private float jumpButtonTimeWindow = 0.1f;
 
         [SerializeField]
-        private float speed = 8;
+        private float speedInitial = 10; // speed at start of game
+        private float speed = 0; // current speed
 
-		[SerializeField]
+        [SerializeField]
 		private float maxPower = 30;
 
         private int groundIntersectionsCount = 0;
@@ -48,11 +49,24 @@
 
         private SpriteRenderer spriteRenderer;
 
+        bool started = false;
+
         private void FixedUpdate()
         {
+            if (!started)
+            {
+                if (Input.GetButton("Jump"))
+                {
+                    started = true;
+                    speed = speedInitial;
+                    jumpHandled = true;
+                }
+                return;
+            }
+            
             physicsBody.AddForce(-physicsBody.velocity.x*Vector2.right, ForceMode2D.Impulse);
             physicsBody.AddForce(speed*Vector2.right, ForceMode2D.Impulse);
-            if (Input.GetButton("Fire1"))
+            if (Input.GetButton("Jump"))
             {
                 if (!jumpRequested)
                 {
@@ -109,9 +123,9 @@
         private void Jump()
         {
             // Negate any existing vertical velocity before jumping.
-            physicsBody.AddForce(-physicsBody.velocity.y*Vector2.up, ForceMode2D.Impulse);
+            physicsBody.AddForce(-physicsBody.velocity.y * Vector2.up, ForceMode2D.Impulse);
 
-            physicsBody.AddForce(jumpImpulse*Vector2.up, ForceMode2D.Impulse);
+            physicsBody.AddForce(jumpImpulse * Vector2.up, ForceMode2D.Impulse);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -177,6 +191,8 @@
 			Assert.IsTrue(powerBarGO != null, "No power bar found in the GUI.");
 			guiPowerBar = powerBarGO.GetComponent<Slider>();
 			Assert.IsTrue(guiPowerBar != null, "Power bar does not have a Slider component.");
-		}
+
+            guiPowerBar.value = Mathf.Min(speedInitial / maxPower, 1);
+        }
     }
 }
