@@ -24,17 +24,10 @@
             Assert.IsTrue(playerPhysicsBody != null, "No Rigidbody2D found on Player.");
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             Vector3 newPosition = transform.position;
-            /*if (Mathf.Abs(playerPhysicsBody.velocity.x) <= 0.01f)
-            {
-                newPosition.x += playerController.GetSpeed()*Time.deltaTime;
-            }
-            else
-            {*/
-                newPosition.x = playerPhysicsBody.transform.position.x + 2.33f;
-            //}
+            newPosition.x += playerController.GetSpeed()*Time.deltaTime;
             transform.position = newPosition;
         }
     }

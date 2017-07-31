@@ -1,4 +1,4 @@
-﻿﻿namespace Assets.Scripts.UI
+﻿﻿﻿namespace Assets.Scripts.UI
 {
     using System;
     using Assets.Scripts.Infrastructure;
@@ -151,14 +151,6 @@
             physicsBody.AddForce(-physicsBody.velocity.y * Vector2.up, ForceMode2D.Impulse);
 
             physicsBody.AddForce(jumpImpulse * Vector2.up, ForceMode2D.Impulse);
-        }
-
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (collision.collider.name == "Collision_Wall" && collision.relativeVelocity.x < 0)
-            {
-                GameOver();
-            }
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
