@@ -55,7 +55,7 @@
         {
             if (!started)
             {
-                if (Input.GetButton("Fire1"))
+                if (Input.GetButton("Jump"))
                 {
                     started = true;
                     speed = speedInitial;
@@ -66,7 +66,7 @@
             
             physicsBody.AddForce(-physicsBody.velocity.x*Vector2.right, ForceMode2D.Impulse);
             physicsBody.AddForce(speed*Vector2.right, ForceMode2D.Impulse);
-            if (Input.GetButton("Fire1"))
+            if (Input.GetButton("Jump"))
             {
                 if (!jumpRequested)
                 {
