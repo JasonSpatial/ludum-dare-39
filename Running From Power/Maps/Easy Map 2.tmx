@@ -18,7 +18,7 @@
 </data>
  </layer>
  <objectgroup name="Powerups">
-  <object id="5" gid="84" x="1610" y="422" width="70" height="70">
+  <object id="5" gid="84" x="1261" y="561" width="70" height="70">
    <properties>
     <property name="prefab" value="Powerups/Powerup"/>
    </properties>
