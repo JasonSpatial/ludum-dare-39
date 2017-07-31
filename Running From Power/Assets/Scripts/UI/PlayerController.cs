@@ -113,20 +113,27 @@
 
             SlowDown(slowDownRate*Time.fixedDeltaTime);
 
+            UpdateDistance();
+        }
+
+        private void UpdateDistance()
+        {
             distance = (transform.position.x - startX) / 3;
             textDistance.text = "Meters " + distance.ToString("0.00");
-            
+
             if (distance > distanceBest)
-            {
                 distanceBest = distance;
-                textBestDistance.text = "Best " + distanceBest.ToString("0.00");
-            }
+            textBestDistance.text = "Best " + distanceBest.ToString("0.00");
         }
+
 
         private void GameOver()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             playerAnimator.StopPlayback();
+
+            if(distance == distanceBest)
+                PlayerPrefs.SetFloat("distanceBest", distanceBest);
         }
 
         /// <summary>
@@ -223,6 +230,8 @@
             guiPowerBar.value = Mathf.Min(speedInitial / maxPower, 1);
 
             playerAnimator.StartPlayback();
+
+            distanceBest = PlayerPrefs.GetFloat("distanceBest");
         }
 
         private void StartGame()
