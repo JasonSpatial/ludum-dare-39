@@ -1,7 +1,5 @@
 ﻿﻿﻿namespace Assets.Scripts.UI
 {
-    using System;
-    using Assets.Scripts.Infrastructure;
     using UnityEngine;
     using UnityEngine.Assertions;
     using UnityEngine.SceneManagement;
@@ -61,6 +59,8 @@
 
         bool started = false;
 
+        private Camera mainCamera;
+
         private void FixedUpdate()
         {
             if (!started)
@@ -102,6 +102,11 @@
             }
 
 			if (transform.position.y + spriteRenderer.sprite.bounds.extents.y <= bottomOfTheGame)
+            {
+                GameOver();
+            }
+
+            if (transform.position.x + spriteRenderer.sprite.bounds.extents.x <= mainCamera.transform.position.x - mainCamera.orthographicSize*mainCamera.aspect)
             {
                 GameOver();
             }
@@ -224,6 +229,11 @@
             playerAnimator.StartPlayback();
 
             distanceBest = PlayerPrefs.GetFloat("distanceBest");
+
+            GameObject mainCameraGO = GameObject.Find("Main Camera");
+            Assert.IsTrue(mainCameraGO != null, "No camera found.");
+            mainCamera = mainCameraGO.GetComponent<Camera>();
+            Assert.IsTrue(mainCamera != null, "No camera component found on camera.");
         }
 
         private void StartGame()

@@ -78,7 +78,6 @@
         {
             if (front.transform.position.x + front.GetMapWidthInPixelsScaled() <= mainCamera.transform.position.x - CameraHalfWidth)
             {
-                front.transform.position = back.transform.position + new Vector3(back.GetMapWidthInPixelsScaled(), 0);
                 Destroy(front.gameObject);
                 front = back;
                 back = LoadNextMapPart(front.transform.position.x + front.GetMapWidthInPixelsScaled());
