@@ -49,6 +49,8 @@
 
         private SpriteRenderer spriteRenderer;
 
+        private Animator playerAnimator;
+
         bool started = false;
 
         private void FixedUpdate()
@@ -57,9 +59,7 @@
             {
                 if (Input.GetButton("Jump"))
                 {
-                    started = true;
-                    speed = speedInitial;
-                    jumpHandled = true;
+                    StartGame();
                 }
                 return;
             }
@@ -109,6 +109,7 @@
         private void GameOver()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            playerAnimator.StopPlayback();
         }
 
         /// <summary>
@@ -187,12 +188,26 @@
             spriteRenderer = GetComponent<SpriteRenderer>();
             Assert.IsTrue(spriteRenderer != null, "PlayerController requires a SpriteRenderer component and there was none.");
 
-			GameObject powerBarGO = GameObject.Find("GUI_PowerBar");
+            playerAnimator = GetComponent<Animator>();
+            Assert.IsTrue(playerAnimator != null, "PlayerController requires a Animator component and there was none.");
+
+            GameObject powerBarGO = GameObject.Find("GUI_PowerBar");
 			Assert.IsTrue(powerBarGO != null, "No power bar found in the GUI.");
+
 			guiPowerBar = powerBarGO.GetComponent<Slider>();
 			Assert.IsTrue(guiPowerBar != null, "Power bar does not have a Slider component.");
 
             guiPowerBar.value = Mathf.Min(speedInitial / maxPower, 1);
+
+            playerAnimator.StartPlayback();
+        }
+
+        private void StartGame()
+        {
+            started = true;
+            speed = speedInitial;
+            jumpHandled = true;
+            playerAnimator.StopPlayback();
         }
     }
 }
