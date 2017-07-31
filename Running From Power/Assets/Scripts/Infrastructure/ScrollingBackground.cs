@@ -57,7 +57,6 @@
             else
                 partFile = partsMed[Random.Range(0, partsMed.Count)];
 
-            Debug.Log(partFile);
             string partPath = partsDirectory + "/" + partFile;
             GameObject partPrefabGO = Resources.Load(partPath) as GameObject;
             Assert.IsTrue(partPrefabGO != null, "The part prefab does not exist! Path:" + partPath);
