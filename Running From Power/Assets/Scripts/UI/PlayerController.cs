@@ -1,5 +1,6 @@
 ﻿namespace Assets.Scripts.UI
 {
+    using System;
     using Assets.Scripts.Infrastructure;
     using UnityEngine;
     using UnityEngine.Assertions;
@@ -50,6 +51,11 @@
         private SpriteRenderer spriteRenderer;
 
         private Animator playerAnimator;
+
+        private Text textDistance;
+
+        private float distance;  // distance the player has moved in meters
+        private float startX;   // the starting position of the Player, which is typically -2.33. Used to calculate distance from this point
 
         bool started = false;
 
@@ -104,6 +110,9 @@
             }
 
             SlowDown(slowDownRate*Time.fixedDeltaTime);
+
+            distance = (transform.position.x - startX) / 3;
+            textDistance.text = "Meters " + distance.ToString("0.00");
         }
 
         private void GameOver()
@@ -197,6 +206,9 @@
 			guiPowerBar = powerBarGO.GetComponent<Slider>();
 			Assert.IsTrue(guiPowerBar != null, "Power bar does not have a Slider component.");
 
+            GameObject distanceGO = GameObject.Find("Distance");
+            textDistance = distanceGO.GetComponent<Text>();
+
             guiPowerBar.value = Mathf.Min(speedInitial / maxPower, 1);
 
             playerAnimator.StartPlayback();
@@ -208,6 +220,7 @@
             speed = speedInitial;
             jumpHandled = true;
             playerAnimator.StopPlayback();
+            startX = transform.position.x;
         }
     }
 }
