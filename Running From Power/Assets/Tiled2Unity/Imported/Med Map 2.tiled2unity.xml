@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 7/30/2017 6:09:15 PM-->
+<!--Last exported: 7/30/2017 9:50:56 PM-->
 <Tiled2Unity version="1.0.12.3">
   <AssignMaterial mesh="Med-Map-2_mesh_0001" material="platformerPack_industrial_tilesheet" />
   <AssignMaterial mesh="Med-Map-2_mesh_tile_0084" material="platformerPack_industrial_tilesheet" />
@@ -20,11 +20,9 @@
       </GameObject>
       <GameObject name="Collision_Wall" layer="Wall">
         <PolygonCollider2D>
-          <Path>9.73,-4.37 9.21,-4.37 9.21,-4.9 9.73,-4.9</Path>
-          <Path>10.43,-4.37 9.91,-4.37 9.91,-4.9 10.43,-4.9</Path>
-          <Path>9.09,-5.25 8.4,-5.25 8.4,-5.58 9.09,-5.58</Path>
-          <Path>9.79,-5.25 9.099999,-5.25 9.099999,-5.58 9.79,-5.58</Path>
-          <Path>10.49,-5.25 9.8,-5.25 9.8,-5.58 10.49,-5.58</Path>
+          <Path>9.71,-4.37 9.179999,-4.37 9.179999,-4.9 9.71,-4.9</Path>
+          <Path>10.41,-4.37 9.88,-4.37 9.88,-4.9 10.41,-4.9</Path>
+          <Path>10.5,-5.25 8.4,-5.25 8.4,-5.6 10.5,-5.6</Path>
           <Path>20.3,-5.77 20.12,-5.77 20.12,-6.3 20.3,-6.3</Path>
           <Path>11.2,-5.77 11.02,-5.77 11.02,-6.3 11.2,-6.3</Path>
           <Path>13.47,-5.77 13.3,-5.77 13.3,-6.3 13.47,-6.3</Path>

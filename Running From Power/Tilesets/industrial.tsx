@@ -154,25 +154,25 @@
  </tile>
  <tile id="89">
   <objectgroup draworder="index">
-   <object id="5" type="Wall" x="10" y="17.5" width="48" height="50.5"/>
+   <object id="5" type="Wall" x="8.75" y="17.5" width="52.5" height="52.5"/>
    <object id="6" type="Ground" x="8.75" y="0" width="52.5" height="17.5"/>
   </objectgroup>
  </tile>
  <tile id="90">
   <objectgroup draworder="index">
-   <object id="1" type="Wall" x="0" y="35" width="69" height="33"/>
+   <object id="1" type="Wall" x="0" y="35" width="70" height="35"/>
    <object id="3" type="Ground" x="0" y="17.5" width="70" height="17.5"/>
   </objectgroup>
  </tile>
  <tile id="91">
   <objectgroup draworder="index">
-   <object id="1" type="Wall" x="11" y="17.5" width="52" height="52.5"/>
+   <object id="1" type="Wall" x="8.75" y="17.5" width="52.5" height="52.5"/>
    <object id="2" type="Ground" x="8.75" y="0" width="52.5" height="17.5"/>
   </objectgroup>
  </tile>
  <tile id="92">
   <objectgroup draworder="index">
-   <object id="1" type="Wall" x="2" y="35" width="67" height="34"/>
+   <object id="1" type="Wall" x="0" y="35" width="70" height="35"/>
    <object id="2" type="Ground" x="0" y="17.5" width="70" height="17.5"/>
   </objectgroup>
  </tile>
@@ -184,19 +184,19 @@
  </tile>
  <tile id="104">
   <objectgroup draworder="index">
-   <object id="1" type="Wall" x="1" y="35" width="69" height="34"/>
+   <object id="1" type="Wall" x="0" y="35" width="70" height="35"/>
    <object id="2" type="Ground" x="0" y="17.5" width="70" height="17.5"/>
   </objectgroup>
  </tile>
  <tile id="105">
   <objectgroup draworder="index">
-   <object id="4" type="Wall" x="10" y="17.5" width="49.3333" height="52.8334"/>
+   <object id="4" type="Wall" x="8.75" y="17.5" width="52.5" height="52.5"/>
    <object id="5" type="Ground" x="8.75" y="0" width="52.5" height="17.5"/>
   </objectgroup>
  </tile>
  <tile id="106">
   <objectgroup draworder="index">
-   <object id="1" type="Wall" x="0.333333" y="35" width="69" height="34.3333"/>
+   <object id="1" type="Wall" x="0" y="35" width="70" height="35"/>
    <object id="2" type="Ground" x="0" y="17.5" width="70" height="17.5"/>
   </objectgroup>
  </tile>
