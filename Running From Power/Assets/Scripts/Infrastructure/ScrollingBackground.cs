@@ -23,16 +23,11 @@
         [SerializeField]
         private string partsDirectory = "";
 
-        [SerializeField]
-        private float maxPower = 100;
-
         private TiledMap back;
 
         private TiledMap front;
 
         private Camera mainCamera;
-
-        private Slider guiPowerBar;
 
         private float CameraHalfWidth
         {
@@ -75,7 +70,7 @@
 
         private void FixedUpdate()
         {
-            if (front.transform.position.x + front.GetMapWidthInPixelsScaled() <= -CameraHalfWidth)
+            if (front.transform.position.x + front.GetMapWidthInPixelsScaled() <= mainCamera.transform.position.x - CameraHalfWidth)
             {
                 front.transform.position = back.transform.position + new Vector3(back.GetMapWidthInPixelsScaled(), 0);
                 Destroy(front.gameObject);
@@ -102,22 +97,6 @@
 
             front = LoadNextMapPart(-CameraHalfWidth);
             back = LoadNextMapPart(front.transform.position.x + front.GetMapWidthInPixelsScaled());
-
-            GameObject powerBarGO = GameObject.Find("GUI_PowerBar");
-            Assert.IsTrue(powerBarGO != null, "No power bar found in the GUI.");
-            guiPowerBar = powerBarGO.GetComponent<Slider>();
-            Assert.IsTrue(guiPowerBar != null, "Power bar does not have a Slider component.");
-        }
-
-        /// <summary>
-        ///     Decrease the scrolling speed of this background.
-        /// </summary>
-        /// <param name="delta">Delta.</param>
-        public void SlowDown(float delta)
-        {
-            speed -= delta;
-            if (speed < 0) speed = 0;
-            UpdateVelocities();
         }
 
         private void UpdateVelocities()
@@ -128,18 +107,6 @@
             Assert.IsTrue(physicsBodyBack != null, "Back part does not have a RigidBody2D.");
 			physicsBodyFront.velocity = speed*Vector2.left;
 			physicsBodyBack.velocity = speed*Vector2.left;
-
-            guiPowerBar.value = Mathf.Min(speed/maxPower, 1);
-        }
-
-        /// <summary>
-        ///     Increases the scrolling speed of this background.
-        /// </summary>
-        /// <param name="delta">The amount to increase the speed by.</param>
-        public void SpeedUp(float delta)
-        {
-            speed += delta;
-            UpdateVelocities();
         }
     }
 }

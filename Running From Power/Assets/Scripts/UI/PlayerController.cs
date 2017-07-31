@@ -4,6 +4,7 @@
     using UnityEngine;
     using UnityEngine.Assertions;
     using UnityEngine.SceneManagement;
+    using UnityEngine.UI;
 
     /// <summary>
     ///     Handles controlling the player.
@@ -27,9 +28,15 @@
         [SerializeField]
         private float jumpButtonTimeWindow = 0.1f;
 
-        ScrollingBackground background;
+        [SerializeField]
+        private float speed = 8;
+
+		[SerializeField]
+		private float maxPower = 30;
 
         private int groundIntersectionsCount = 0;
+
+        private Slider guiPowerBar;
 
         private bool jumpRequested = false;
 
@@ -43,6 +50,8 @@
 
         private void FixedUpdate()
         {
+            physicsBody.AddForce(-physicsBody.velocity.x*Vector2.right, ForceMode2D.Impulse);
+            physicsBody.AddForce(speed*Vector2.right, ForceMode2D.Impulse);
             if (Input.GetButton("Fire1"))
             {
                 if (!jumpRequested)
@@ -75,17 +84,26 @@
                 GameOver();
             }
 
-            if (Mathf.Approximately(background.GetSpeed(), 0))
+            if (Mathf.Approximately(speed, 0))
             {
                 GameOver();
             }
 
-            background.SlowDown(slowDownRate*Time.fixedDeltaTime);
+            SlowDown(slowDownRate*Time.fixedDeltaTime);
         }
 
         private void GameOver()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        /// <summary>
+        ///     Gets the players current speed.
+        /// </summary>
+        /// <returns>The speed.</returns>
+        public float GetSpeed()
+        {
+            return speed;
         }
 
         private void Jump()
@@ -100,7 +118,7 @@
         {
             if (collision.tag == "Powerup")
             {
-                background.SpeedUp(2);
+                SpeedUp(2);
             }
             else if (collision.name == "Collision_Ground")
             {
@@ -122,6 +140,23 @@
             }
         }
 
+        private void SlowDown(float delta)
+        {
+            speed = Mathf.Max(0, speed - delta);
+            SpeedChanged();
+        }
+
+        private void SpeedChanged()
+        {
+            guiPowerBar.value = Mathf.Min(speed/maxPower, 1);
+        }
+
+        private void SpeedUp(float delta)
+        {
+            speed += delta;
+            SpeedChanged();
+        }
+
         private void Start()
         {
             physicsBody = GetComponent<Rigidbody2D>();
@@ -130,10 +165,10 @@
             spriteRenderer = GetComponent<SpriteRenderer>();
             Assert.IsTrue(spriteRenderer != null, "PlayerController requires a SpriteRenderer component and there was none.");
 
-            GameObject backgroundGO = GameObject.Find("Scrolling Background");
-            Assert.IsTrue(backgroundGO != null, "Could not find the scrolling background.");
-            background = backgroundGO.GetComponent<ScrollingBackground>();
-            Assert.IsTrue(background != null, "The scrolling background game object does not have a ScrollingBackground component.");
-        }
+			GameObject powerBarGO = GameObject.Find("GUI_PowerBar");
+			Assert.IsTrue(powerBarGO != null, "No power bar found in the GUI.");
+			guiPowerBar = powerBarGO.GetComponent<Slider>();
+			Assert.IsTrue(guiPowerBar != null, "Power bar does not have a Slider component.");
+		}
     }
 }
