@@ -15,6 +15,35 @@
     {
         private const float pixelsPerUnit = 100;
 
+        private const string spawnPrefabPath = "Assets/Prefabs/Systems/Spawn.prefab";
+
+        private const string prefabDirectory = "Assets/Prefabs";
+
+        private Spawn spawnPrefab;
+
+        private Spawn SpawnPrefab
+        {
+            get
+            {
+                if (spawnPrefab == null)
+                {
+                    GameObject prefabGO = (GameObject)UnityEditor.AssetDatabase.LoadAssetAtPath(spawnPrefabPath, typeof(GameObject));
+                    if (prefabGO == null)
+                    {
+                        Debug.Log("Could not load the spawn prefab from '" + spawnPrefabPath + "'");
+                        return null;
+                    }
+                    spawnPrefab = prefabGO.GetComponent<Spawn>();
+                    if (spawnPrefab == null)
+                    {
+                        Debug.Log("Spawn prefab does not have Spawn component.");
+                        return null;
+                    }
+                }
+                return spawnPrefab;
+            }
+        }
+
         public void CustomizePrefab(GameObject prefab)
         {
             Rigidbody2D physicsBody = prefab.AddComponent<Rigidbody2D>();
@@ -118,7 +147,7 @@
                 bool.TryParse(props["floating"], out floating);
             }
 
-            string prefabPath = "Assets/Prefabs/" + prefabName + ".prefab";
+            string prefabPath = prefabDirectory + "/" + prefabName + ".prefab";
             GameObject prefab = (GameObject)UnityEditor.AssetDatabase.LoadAssetAtPath(prefabPath, typeof(GameObject));
             if (prefab == null)
             {
@@ -126,18 +155,10 @@
                 return;
             }
 
-            prefabPath = "Assets/Prefabs/Systems/Spawn.prefab";
-            GameObject spawnPrefab = (GameObject)UnityEditor.AssetDatabase.LoadAssetAtPath(prefabPath, typeof(GameObject));
-            if (spawnPrefab == null)
-            {
-                Debug.Log("Tile Object #" + tileObject.TmxId + ": Could not load '" + prefabPath + "'");
-                return;
-            }
-
             Vector2 convertedSize = tileObject.TmxSize/pixelsPerUnit;
             Vector2 halfSize = convertedSize/2;
-            GameObject newGameObject = GameObject.Instantiate(spawnPrefab, gameObject.transform.position + new Vector3(halfSize.x, halfSize.y, 0), Quaternion.identity, gameObject.transform);
-            if (newGameObject == null)
+            Spawn spawn = GameObject.Instantiate(SpawnPrefab, gameObject.transform.position + new Vector3(halfSize.x, halfSize.y, 0), Quaternion.identity, gameObject.transform);
+            if (spawn == null)
             {
                 Debug.Log("Tile Object #" + tileObject.TmxId + ": Could not instantiate game object from prefab '" + prefabPath + "'!");
                 return;
@@ -148,19 +169,14 @@
             newPosition.y = Mathf.Round(newPosition.y);
             newPosition = newPosition/pixelsPerUnit;
             gameObject.transform.position = newPosition;
-
-            Spawn spawn = newGameObject.GetComponent<Spawn>();
-            spawn.name = newGameObject.name;
+            
             Transform parent = null;
             MeshRenderer renderer = gameObject.GetComponentInChildren<MeshRenderer>();
             if (!floating)
             {
                 parent = gameObject.transform;
             }
-            spawn.Construct(parent,
-                            prefab,
-                            renderer.sortingLayerID,
-                            renderer.sortingOrder);
+            spawn.Construct(parent, prefab, renderer.sortingLayerID, renderer.sortingOrder);
 
             Transform oldTileObject = gameObject.transform.Find("TileObject");
             if (oldTileObject != null)
