@@ -30,13 +30,13 @@
                     GameObject prefabGO = (GameObject)UnityEditor.AssetDatabase.LoadAssetAtPath(spawnPrefabPath, typeof(GameObject));
                     if (prefabGO == null)
                     {
-                        Debug.Log("Could not load the spawn prefab from '" + spawnPrefabPath + "'");
+                        Debug.LogError("Could not load the spawn prefab from '" + spawnPrefabPath + "'");
                         return null;
                     }
                     spawnPrefab = prefabGO.GetComponent<Spawn>();
                     if (spawnPrefab == null)
                     {
-                        Debug.Log("Spawn prefab does not have Spawn component.");
+                        Debug.LogError("Spawn prefab does not have Spawn component.");
                         return null;
                     }
                 }
@@ -55,7 +55,7 @@
         {
             if (!props.ContainsKey(propertyName))
             {
-                Debug.Log(objectType + " #" + objectID + ": '" + propertyName + "' property missing!");
+                Debug.LogError(objectType + " #" + objectID + ": '" + propertyName + "' property missing!");
                 result = (TEnum)Activator.CreateInstance(typeof(TEnum));
                 return false;
             }
@@ -63,7 +63,7 @@
             string value = props[propertyName];
             if (!EnumUtilities.TryParse(value, out result))
             {
-                Debug.Log(objectType + " #" + objectID + ": '" + propertyName + "' value of '" + value + "' is not supported!");
+                Debug.LogError(objectType + " #" + objectID + ": '" + propertyName + "' value of '" + value + "' is not supported!");
                 return false;
             }
 
@@ -74,7 +74,7 @@
         {
             if (!props.ContainsKey(propertyName))
             {
-                Debug.Log(objectType + " #" + objectID + ": '" + propertyName + "' property missing!");
+                Debug.LogError(objectType + " #" + objectID + ": '" + propertyName + "' property missing!");
                 result = 0;
                 return false;
             }
@@ -82,7 +82,7 @@
             string value = props[propertyName];
             if (!float.TryParse(value, out result))
             {
-                Debug.Log(objectType + " #" + objectID + ": '" + propertyName + "' value of '" + value + "' could not be parsed as a float!");
+                Debug.LogError(objectType + " #" + objectID + ": '" + propertyName + "' value of '" + value + "' could not be parsed as a float!");
                 return false;
             }
 
@@ -93,7 +93,7 @@
         {
             if (!props.ContainsKey(propertyName))
             {
-                Debug.Log(objectType + " #" + objectID + ": '" + propertyName + "' property missing!");
+                Debug.LogError(objectType + " #" + objectID + ": '" + propertyName + "' property missing!");
                 result = 0;
                 return false;
             }
@@ -101,7 +101,7 @@
             string value = props[propertyName];
             if (!int.TryParse(value, out result))
             {
-                Debug.Log(objectType + " #" + objectID + ": '" + propertyName + "' value of '" + value + "' could not be parsed as an int!");
+                Debug.LogError(objectType + " #" + objectID + ": '" + propertyName + "' value of '" + value + "' could not be parsed as an int!");
                 return false;
             }
 
@@ -112,7 +112,7 @@
         {
             if (!props.ContainsKey(propertyName))
             {
-                Debug.Log(objectType + " #" + objectID + ": '" + propertyName + "' property missing!");
+                Debug.LogError(objectType + " #" + objectID + ": '" + propertyName + "' property missing!");
                 result = "";
                 return false;
             }
@@ -134,10 +134,10 @@
             TileObject tileObject = gameObject.GetComponent<TileObject>();
             if (tileObject == null)
             {
-                Debug.Log("'TileObject' component does not exist on the game object!");
+                Debug.LogError("'TileObject' component does not exist on the game object!");
                 return;
             }
-
+            
             string prefabName;
             if (!GetStringProperty("prefab", props, out prefabName, "Tile Object", tileObject.TmxId)) return;
 
@@ -151,7 +151,7 @@
             GameObject prefab = (GameObject)UnityEditor.AssetDatabase.LoadAssetAtPath(prefabPath, typeof(GameObject));
             if (prefab == null)
             {
-                Debug.Log("Tile Object #" + tileObject.TmxId + ": Could not load '" + prefabPath + "'");
+                Debug.LogError("Tile Object #" + tileObject.TmxId + ": Could not load '" + prefabPath + "'");
                 return;
             }
 
@@ -160,7 +160,7 @@
             Spawn spawn = GameObject.Instantiate(SpawnPrefab, gameObject.transform.position + new Vector3(halfSize.x, halfSize.y, 0), Quaternion.identity, gameObject.transform);
             if (spawn == null)
             {
-                Debug.Log("Tile Object #" + tileObject.TmxId + ": Could not instantiate game object from prefab '" + prefabPath + "'!");
+                Debug.LogError("Tile Object #" + tileObject.TmxId + ": Could not instantiate game object from prefab '" + prefabPath + "'!");
                 return;
             }
 
